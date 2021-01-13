@@ -1,7 +1,5 @@
 package binarySearch
 
-import "fmt"
-
 // RightBoundSearch 表示从右边界开始搜索, such as [1,2,2,2,3]
 func RightBoundSearch(nums []int, target int) int {
 	length := len(nums)
@@ -10,17 +8,16 @@ func RightBoundSearch(nums []int, target int) int {
 	}
 	left, right := 0, length-1
 	for left <= right {
-		mid := (left + (right - left)) / 2
+		mid := left + (right-left)/2
 		value := nums[mid]
-		fmt.Println("-----", target, value, mid)
 		switch {
 		case value == target:
 			// 扩大左侧边界
 			left = mid + 1
-		case value > target:
-			right = mid - 1
 		case value < target:
 			left = mid + 1
+		case value > target:
+			right = mid - 1
 		}
 	}
 	// TODO 注意边界条件

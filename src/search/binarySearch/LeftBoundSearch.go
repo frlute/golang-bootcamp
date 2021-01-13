@@ -48,8 +48,8 @@ func LeftBoundSearchV1(nums []int, target int) int {
 
 	left, right := 0, length-1
 	for left <= right {
-		mid := (left + (right - left)) / 2
-		value := nums[left]
+		mid := left + (right-left)/2
+		value := nums[mid]
 
 		switch {
 		case value == target:
@@ -64,8 +64,8 @@ func LeftBoundSearchV1(nums []int, target int) int {
 		}
 	}
 
-	// 检查出界情况
-	if left > length || nums[left] != target {
+	// 检查 left 越界的情况
+	if left >= length || nums[left] != target {
 		return -1
 	}
 
