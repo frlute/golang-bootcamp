@@ -4,33 +4,23 @@ import (
 	"testing"
 )
 
-func TestLeftBoundSearch(t *testing.T) {
+func TestSearch(t *testing.T) {
 	cases := []struct {
 		input  []int
 		target int
 		expect int
 	}{
 		{
-			input:  []int{},
-			target: 2,
-			expect: -1,
-		},
-		{
-			input:  []int{2, 5, 9},
-			target: 13,
-			expect: -1,
-		},
-		{
-			input:  []int{1, 2, 2, 2, 3},
-			target: 2,
-			expect: 1,
+			[]int{1, 2, 4, 5, 7},
+			4,
+			2,
 		},
 	}
 
 	for _, c := range cases {
-		got := LeftBoundSearch(c.input, c.target)
+		got := Search(c.input, c.target)
 		if got != c.expect {
-			t.Errorf("LeftBoundSearch(%v, %d) == %d， want=%d", c.input, c.target, got, c.expect)
+			t.Errorf("Search(%v, %d) == %d, want=%d", c.input, c.target, got, c.expect)
 		}
 	}
 }
