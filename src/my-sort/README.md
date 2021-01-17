@@ -6,9 +6,9 @@
 - 如何评价、分析一个排序算法
 
 ## 具体排序
-- [ ] 冒泡
+- [x] [冒泡](https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F)
 - [ ] 选择
-- [ ] 插入
+- [ ] [插入](https://zh.wikipedia.org/zh-hans/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F)
 - [ ] 归并
 - [ ] 希尔
 - [ ] 快速

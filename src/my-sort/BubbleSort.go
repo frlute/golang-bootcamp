@@ -8,7 +8,7 @@ import "sort"
 	2.看是否满足大小关系要求，如果不满足交换位置
 	3.循环 1、2 步骤
 */
-func BubbleSort(data sort.Interface) {
+func BubbleSort(data sort.IntSlice) {
 	n := data.Len()
 	if n <= 1 {
 		return
@@ -24,7 +24,7 @@ func BubbleSort(data sort.Interface) {
 }
 
 // BubbleSortV1 改进：如果某次没有交换时表示已排好序
-func BubbleSortV1(data sort.Interface) {
+func BubbleSortV1(data sort.IntSlice) {
 	n := data.Len()
 	if n <= 1 {
 		return
