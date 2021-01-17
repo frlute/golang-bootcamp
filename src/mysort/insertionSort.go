@@ -21,13 +21,18 @@ func InsertionSort(data []int) {
 		j := i - 1
 		value := data[i]
 		// 寻找插入的位置
-		for ; j >= 0; j-- {
-			if data[j] > value {
-				data[j+1] = data[j] // 数据移动
-			} else {
-				break
-			}
+		// for ; j >= 0; j-- {
+		// 	if data[j] > value {
+		// 		data[j+1] = data[j] // 数据移动
+		// 	} else {
+		// 		break
+		// 	}
+		// }
+		for j >= 0 && data[j] > value {
+			data[j+1] = data[j] // 数据移动
+			j--
 		}
-		// data[j+1] = data[i] //插入数据
+
+		data[j+1] = value //插入数据, 此时用 value 因如果数据移动，data 数据已变化
 	}
 }
