@@ -30,11 +30,7 @@
 
 [两数之和](https://github.com/frlute/leetcode/blob/main/src/167.two-sum-ii-input-array-is-sorted.go)
 
-## 解题思路
-
-## 常见应用
-
-## 进阶-滑动窗口
+## 进阶-滑动窗口(待补充示例)
 
 [最小子字符串](https://github.com/frlute/leetcode/blob/main/src/76.minimum-window-substring.go)
 

@@ -33,6 +33,7 @@ func InsertionSort(data []int) {
 			j--
 		}
 
-		data[j+1] = value //插入数据, 此时用 value 因如果数据移动，data 数据已变化
+		//插入数据, 此时用 value 因如果数据移动，data 数据已变化
+		data[j+1] = value
 	}
 }
