@@ -9,10 +9,10 @@
 - [x] [冒泡](https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F)
 - [x] [选择](https://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F)
 - [x] [插入](https://zh.wikipedia.org/zh-hans/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F)
-- [x] 归并(https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
+- [x] [归并](https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
   - [ ] 用哨兵方式简化流程
 - [ ] 希尔(可以视为插入排序的优化)
-- [ ] 快速
+- [ ] [快速](https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
 - [ ] 基数
 - [ ] 计数
 - [ ] 堆
@@ -25,6 +25,7 @@
 |插入|O(n^2)||是|是|是||||
 |选择|O(n^2)||是|是|否||||
 |归并|O(nlogn)|O(n)|否|是|是|分治思想|递归|归并排序的执行效率与要排序的原始数组的有序程度无关，所以其时间复杂度是非常稳定的|
+|快排|||是x|是x|是x|分治思想|||
 
 ## 问题解答
 
@@ -45,3 +46,12 @@ if (a[j] > value) {
     a[j+1] = a[j]; // 数据移动
 }
 ```
+
+## 归并排序与快速排序区别与联系
+
+### 相同点
+
+- 都是采用分治思想
+- 
+
+![](./../pictures/quickSortCmpMergeSort.jpg)
