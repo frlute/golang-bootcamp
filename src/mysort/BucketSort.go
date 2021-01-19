@@ -45,7 +45,7 @@ func BucketSort(data []int) {
 func getMaxInArr(data []int) int {
 	max := 0
 	for _, value := range data {
-		if value > 0 {
+		if value > max {
 			max = value
 		}
 	}

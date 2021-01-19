@@ -14,9 +14,9 @@
 - [ ] 希尔(可以视为插入排序的优化)
 - [x] [快速](https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
 - [ ] 基数
-- [ ] 计数
+- [ ] [计数](https://zh.wikipedia.org/wiki/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F)
 - [ ] 堆
-- [ ] [桶](https://zh.wikipedia.org/wiki/%E6%A1%B6%E6%8E%92%E5%BA%8F)
+- [x] [桶](https://zh.wikipedia.org/wiki/%E6%A1%B6%E6%8E%92%E5%BA%8F)
 ## 各种排序算法比较
 
 |排序|时间复杂度|空间复杂度|是否原地| 是否基于比较 | 是否稳定| 思想|技巧| 其他|
@@ -27,7 +27,8 @@
 |归并|O(nlogn)|O(n)|否|是|是|分治思想|递归|归并排序的执行效率与要排序的原始数组的有序程度无关，所以其时间复杂度是非常稳定的|
 |快排|O(nlogn)|O(1)|是|是|否|分治思想|递归||
 ||||||||||
-|桶排序|O(N+K)|O(N+K)|否|否(线性)||归纳||对数据有要求|
+|桶排序|O(N+K)|O(N+K)|是(与桶内排序算法有关)|否(线性)|是|归纳||对数据有要求|
+|计数|O(N+K)|O(N+K)||(线性)|是|归纳||对数据有要求|
 
 ## 问题解答
 
@@ -66,4 +67,5 @@ if (a[j] > value) {
 ## 可参考
 
 [go 排序实现](https://www.bookstack.cn/read/For-learning-Go-Tutorial/src-chapter16-01.0.md)
+
 [十张动图带你搞懂排序算法](https://my.oschina.net/u/4113533/blog/4767548)
