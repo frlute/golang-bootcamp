@@ -10,13 +10,13 @@
 
 示例:
 
-[linked-list-cycle](https://github.com/frlute/leetcode/blob/main/src/141.linked-list-cycle.go)
+[判定链表中是否含有环](https://github.com/frlute/leetcode/blob/main/src/141.linked-list-cycle.go)
 
-[linked-list-cycle-ii](https://github.com/frlute/leetcode/blob/main/src/142.linked-list-cycle-ii.go)
+[已知链表中含有环，返回这个环的起始位置](https://github.com/frlute/leetcode/blob/main/src/142.linked-list-cycle-ii.go)
 
-[middle-of-the-linked-list](https://github.com/frlute/leetcode/blob/main/src/876.middle-of-the-linked-list.go)
+[寻找链表的中点](https://github.com/frlute/leetcode/blob/main/src/876.middle-of-the-linked-list.go)
 
-[remove-nth-node-from-end-of-list](https://github.com/frlute/leetcode/blob/main/src/19.remove-nth-node-from-end-of-list.go)
+[删除链表的倒数第N个节点](https://github.com/frlute/leetcode/blob/main/src/19.remove-nth-node-from-end-of-list.go)
 
 ### 左右指针
 
@@ -30,11 +30,17 @@
 
 [两数之和](https://github.com/frlute/leetcode/blob/main/src/167.two-sum-ii-input-array-is-sorted.go)
 
-## 进阶-滑动窗口(待补充示例)
+[反转数组](https://github.com/frlute/leetcode/blob/main/src/344.reverse-string.go#L15)
+
+## 进阶-滑动窗口
 
 [最小子字符串](https://github.com/frlute/leetcode/blob/main/src/76.minimum-window-substring.go)
 
-[字符串的排列](https://github.com/frlute/leetcode/blob/main/src/76.minimum-window-substring.go)
+[字符串的排列](https://github.com/frlute/leetcode/blob/main/src/567.permutation-in-string.go)
+
+[找所有字母异位词](https://github.com/frlute/leetcode/blob/main/src/438.find-all-anagrams-in-a-string.go)
+
+[最长无重复子串](https://github.com/frlute/leetcode/blob/main/src/3.longest-substring-without-repeating-characters.go)
 
 ### 参考
 

@@ -23,4 +23,11 @@ func TestSearch(t *testing.T) {
 			t.Errorf("Search(%v, %d) == %d, want=%d", c.input, c.target, got, c.expect)
 		}
 	}
+
+	for _, c := range cases {
+		got := SearchByRecursion(c.input, c.target)
+		if got != c.expect {
+			t.Errorf("SearchByRecursion(%v, %d) == %d, want=%d", c.input, c.target, got, c.expect)
+		}
+	}
 }
