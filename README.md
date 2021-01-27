@@ -1,5 +1,5 @@
 # go-playground
-golang code playground
+golang code playground, 本项目主要是通过 `golang` 来练习一些日常遇到的代码示例。
 
 TO-DO-LIST
 
@@ -20,4 +20,5 @@ TO-DO-LIST
 ## 备用地址
 
 [data structures](https://en.wikipedia.org/wiki/List_of_data_structures)
+
 [algorithms](https://en.wikipedia.org/wiki/Introduction_to_Algorithms)
