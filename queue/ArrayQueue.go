@@ -19,6 +19,7 @@ func NewArrayQueue(capacity int) *ArrayQueue {
 }
 
 func (q *ArrayQueue) enqueue(item string) bool {
+	// 队满
 	if q.tail == q.capacity {
 		// tail ==n && head==0，表示整个队列都占满了
 		if q.head == 0 {

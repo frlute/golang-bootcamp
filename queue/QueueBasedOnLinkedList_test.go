@@ -7,16 +7,16 @@ import (
 )
 
 func TestQueueBasedOnLinkedList(t *testing.T) {
-	s := NewLinkedListQueue()
+	q := NewLinkedListQueue()
 	as := assert.New(t)
 
 	// enqueue
-	as.Equal(true, s.enqueue("hello"))
-	as.Equal(true, s.enqueue("world"))
+	q.enqueue("hello")
+	q.enqueue("world")
+	as.Equal(2, q.length)
 
-	// dequeue
-	as.Equal("hello", s.dequeue())
-	as.Equal("world", s.dequeue())
-
-	as.Equal(true, s.enqueue("test"))
+	// // dequeue
+	as.Equal("hello", q.dequeue())
+	as.Equal("world", q.dequeue())
+	as.Equal(0, q.length)
 }
