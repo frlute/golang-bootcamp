@@ -7,7 +7,7 @@ import (
 )
 
 func TestArrayStack(t *testing.T) {
-	s := NewArrayStack(2)
+	s := NewArrayStack(2, false)
 	as := assert.New(t)
 
 	// push

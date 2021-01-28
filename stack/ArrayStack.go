@@ -25,7 +25,7 @@ func (s *ArrayStack) push(item string) bool {
 	// 数组空间不够了，直接返回false，入栈失败。
 	if s.count == s.size {
 		if !s.dynamicCapacity {
-			fmt.Printf("已经最大容量, count %d, size %d, items: %+v", s.count, s.size, s.items)
+			fmt.Printf("已经最大容量, count %d, size %d, items: %+v\n", s.count, s.size, s.items)
 			return false
 		}
 		// 进行动态扩容
