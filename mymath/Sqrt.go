@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// Sqrt 主要公式 z -= (z*z-x)/(2*z)
+// Sqrt 主要公式 z -= (z*z-x)/(2*z) 牛顿弦切法求解平方根
 func Sqrt(x, accuracy float64) (float64, error) {
 	if x <= 1 {
 		return x, fmt.Errorf("cannot Sqrt negativ number: %g", float64(x))

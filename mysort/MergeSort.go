@@ -7,20 +7,20 @@ package mysort
 分治算法一般都是用递归来实现的。分治是一种解决问题的处理思想，递归是一种编程技巧
 */
 func MergeSort(data []int) []int {
-	n := len(data)
-	if n <= 1 {
+	length := len(data)
+	if length <= 1 {
 		return data
 	}
 
-	mid := n / 2
+	mid := length / 2
 	// 分治递归
 	left := MergeSort(data[0:mid])
 	right := MergeSort(data[mid:])
 
-	return merge(left, right)
+	return merge(left, right, mid)
 }
 
-func merge(left, right []int) []int {
+func merge(left, right []int, mid) []int {
 	result := []int{}
 
 	// [左右]对比，是指左的第一个元素，与右边的第一个元素进行对比，哪个小，
@@ -41,3 +41,5 @@ func merge(left, right []int) []int {
 
 	return result
 }
+
+// TODO 可以用哨兵方法优化 merge 函数

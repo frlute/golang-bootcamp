@@ -31,4 +31,25 @@ func TestSqrt(t *testing.T) {
 			t.Errorf("Sqrt(%v) execute expect value: %v, actual value: %v", c.data, c.expect, got)
 		}
 	}
+
+	sqrt2Cases := []struct {
+		data   int
+		expect int
+	}{
+		{
+			4.0,
+			2.0,
+		},
+		{
+			3,
+			1,
+		},
+	}
+
+	for _, c := range sqrt2Cases {
+		got := Sqrt2(c.data)
+		if got != c.expect {
+			t.Errorf("Sqrt(%v) execute expect value: %v, actual value: %v", c.data, c.expect, got)
+		}
+	}
 }

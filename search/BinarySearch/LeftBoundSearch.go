@@ -71,3 +71,35 @@ func LeftBoundSearchV1(nums []int, target int) int {
 
 	return left
 }
+
+// LeftBoundSearchV1 表示优化版本
+func LeftBoundSearchV2(nums []int, target int) int {
+	length := len(nums)
+	if length == 0 {
+		return -1
+	}
+
+	left, right := 0, length-1
+	for left <= right {
+		mid := left + (right-left)/2
+		value := nums[mid]
+
+		switch {
+		case value == target:
+			// 优化版边界条件
+			if (mid == 0) || (nums[mid-1] != value) {
+				return mid
+			}
+			// 收缩右侧边界
+			right = mid - 1
+		case value < target:
+			// 搜索区间变为 [mid+1, right]
+			left = mid + 1
+		case value > target:
+			// 搜索区间变为 [left, mid-1]
+			right = mid - 1
+		}
+	}
+
+	return left
+}

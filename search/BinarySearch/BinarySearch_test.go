@@ -15,6 +15,12 @@ func TestSearch(t *testing.T) {
 			4,
 			2,
 		},
+		// error
+		// {
+		// 	[]int{1, 2, 2, 4, 5, 7},
+		// 	2,
+		// 	1,
+		// },
 	}
 
 	for _, c := range cases {

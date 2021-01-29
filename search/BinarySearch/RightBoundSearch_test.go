@@ -22,5 +22,10 @@ func TestRightBoundSearch(t *testing.T) {
 		if got != c.expect {
 			t.Errorf("RightBoundSearch(%v, %d) == %d， want=%d", c.input, c.target, got, c.expect)
 		}
+
+		got1 := RightBoundSearchV1(c.input, c.target)
+		if got1 != c.expect {
+			t.Errorf("RightBoundSearchV1(%v, %d) == %d， want=%d", c.input, c.target, got1, c.expect)
+		}
 	}
 }

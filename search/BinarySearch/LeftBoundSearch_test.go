@@ -36,5 +36,10 @@ func TestLeftBoundSearch(t *testing.T) {
 		if got1 != c.expect {
 			t.Errorf("LeftBoundSearchV1(%v, %d) == %d， want=%d", c.input, c.target, got1, c.expect)
 		}
+
+		got2 := LeftBoundSearchV1(c.input, c.target)
+		if got2 != c.expect {
+			t.Errorf("LeftBoundSearchV2(%v, %d) == %d， want=%d", c.input, c.target, got2, c.expect)
+		}
 	}
 }

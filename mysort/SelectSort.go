@@ -5,23 +5,23 @@ package mysort
 但是选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾。
 */
 func SelectSort(data []int) {
-	n := len(data)
-	if n <= 1 {
+	length := len(data)
+	if length <= 1 {
 		return
 	}
 
-	for i := 0; i < n; i++ {
+	for index := 0; index < length; index++ {
 		// 假定首元素为最小元素
-		min := i
-		// 从i右侧的所有元素中找出当前最小值所在的下标
-		for j := i + 1; j < n; j++ {
+		min := index
+		// 从 index 右侧的所有元素中找出当前最小值所在的下标
+		for j := index + 1; j < length; j++ {
 			if data[j] < data[min] {
 				min = j
 			}
 		}
 		// 把每次找出来的最小值与之前的最小值做交换
-		if i != min {
-			data[i], data[min] = data[min], data[i]
+		if index != min {
+			data[index], data[min] = data[min], data[index]
 		}
 	}
 }

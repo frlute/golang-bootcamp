@@ -12,28 +12,21 @@ package mysort
 	6.重复步骤2~5
 */
 func InsertionSort(data []int) {
-	n := len(data)
-	if n <= 1 {
+	length := len(data)
+	if length <= 1 {
 		return
 	}
 
-	for i := 1; i < n; i++ {
-		j := i - 1
-		value := data[i]
+	for index := 1; index < length; index++ {
+		startPos := index - 1
+		value := data[index]
 		// 寻找插入的位置
-		// for ; j >= 0; j-- {
-		// 	if data[j] > value {
-		// 		data[j+1] = data[j] // 数据移动
-		// 	} else {
-		// 		break
-		// 	}
-		// }
-		for j >= 0 && data[j] > value {
-			data[j+1] = data[j] // 数据移动
-			j--
+		for startPos >= 0 && data[startPos] > value {
+			data[startPos+1] = data[startPos] // 数据移动
+			startPos--
 		}
 
 		//插入数据, 此时用 value 因如果数据移动，data 数据已变化
-		data[j+1] = value
+		data[startPos+1] = value
 	}
 }
