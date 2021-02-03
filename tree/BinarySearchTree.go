@@ -61,24 +61,21 @@ func (b *BST) insert(item int) bool {
 	return true
 }
 
-func (b *BST) delete(item int) {
+func (b *BST) delete(target int) {
 	if b.root == nil {
 		return
 	}
 
 	// 查询删除的节点
-	deleteNode := b.root // TODO 可能有问题，因为 b 是指针相当于引用了
+	deleteNode := b.root
 	var parentNode *Node // 要删除节点的父节点
-	for deleteNode != nil && deleteNode.data != item {
+	for deleteNode != nil && deleteNode.data != target {
 		value := deleteNode.data.(int)
-		if item > value {
-			parentNode = deleteNode
+		parentNode = deleteNode
+		if target > value {
 			deleteNode = deleteNode.right
-		} else if item < value {
+		} else if target < value {
 			deleteNode = deleteNode.left
-			parentNode = deleteNode
-		} else {
-			break
 		}
 	}
 	// 没找到删除的节点
@@ -108,6 +105,8 @@ func (b *BST) delete(item int) {
 		child = deleteNode.left
 	} else if deleteNode.right != nil {
 		child = deleteNode.right
+	} else {
+		child = nil
 	}
 
 	if parentNode == nil {
@@ -120,7 +119,7 @@ func (b *BST) delete(item int) {
 	}
 }
 
-// 获取最小节点
+// 获取值最小节点
 func (b *BST) min() *Node {
 	node := b.root
 	for node.left != nil {
@@ -130,7 +129,7 @@ func (b *BST) min() *Node {
 	return node
 }
 
-// 获取最大节点
+// 获取值最大节点
 func (b *BST) max() *Node {
 	node := b.root
 	for node.right != nil {
