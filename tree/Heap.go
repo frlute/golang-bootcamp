@@ -21,6 +21,7 @@ func NewHeap(capacity int) *Heap {
 	}
 }
 
+// top-max heap -> heapify from down to up
 func (h *Heap) insert(item int) bool {
 	if h.length == h.capacity {
 		fmt.Println("the heap is full")
@@ -37,6 +38,36 @@ func (h *Heap) insert(item int) bool {
 	}
 
 	return true
+}
+
+// heapfify from up to down
+func (h *Heap) removeMax() {
+	if h.length == 0 {
+		return
+	}
+	// h.items[1] = h.items[h.length]
+	swap(h.items, 1, h.length)
+	h.length--
+
+	h.heapify(h.length, 1)
+}
+
+// 自上往下堆化
+func (h *Heap) heapify(length, count int) {
+	for {
+		maxPos := count
+		if count*2 <= length && h.items[count] < h.items[count*2] {
+			maxPos = count * 2
+		}
+		if count*2+1 <= length && h.items[maxPos] < h.items[count*2+1] {
+			maxPos = count*2 + 1
+		}
+		if maxPos == count {
+			break
+		}
+		swap(h.items, count, maxPos)
+		count = maxPos
+	}
 }
 
 func swap(items []int, originPos, targetPos int) {
