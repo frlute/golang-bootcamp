@@ -2,8 +2,8 @@ package utils
 
 import "errors"
 
-//Retrier 实现一种自动重试的统一封装(适用于请求发出并忘记的场景)
-type Retrier struct {
+//AsyncRetrier 实现一种自动重试的统一封装(适用于请求发出并忘记的场景)
+type AsyncRetrier struct {
 	maxAttempt  int
 	attempt     int
 	done        bool
@@ -22,11 +22,11 @@ var (
 	ErrMaxAttempt   = errors.New("Max attempt should be greater than zero")
 )
 
-// New contstructing new retrier object
+// NewAsyncRetrier contstructing new AsyncRetrier object
 // ret are retriable object that has Exec method
 // maxAttempt is the maximum trying attempt before it ends
 // loggerFunc is optional if you want to put logger of any error does occurs in the process
-func NewRetrier(ret Retrieable, maxAttempt int, loggerFunc func(error)) (*Retrier, error) {
+func NewAsyncRetrier(ret Retrieable, maxAttempt int, loggerFunc func(error)) (*AsyncRetrier, error) {
 	if maxAttempt < 1 {
 		return nil, ErrMaxAttempt
 	}
@@ -34,7 +34,7 @@ func NewRetrier(ret Retrieable, maxAttempt int, loggerFunc func(error)) (*Retrie
 		return nil, ErrRetriableNil
 	}
 
-	return &Retrier{
+	return &AsyncRetrier{
 		maxAttempt:  maxAttempt,
 		attempt:     0,
 		retrierable: ret,
@@ -43,11 +43,11 @@ func NewRetrier(ret Retrieable, maxAttempt int, loggerFunc func(error)) (*Retrie
 }
 
 // Start startup retry flow
-func (r *Retrier) Start() {
+func (r *AsyncRetrier) Start() {
 	go r.run()
 }
 
-func (r *Retrier) run() {
+func (r *AsyncRetrier) run() {
 	for !r.isDone() {
 		err := r.do()
 		if err == nil {
@@ -61,11 +61,11 @@ func (r *Retrier) run() {
 	}
 }
 
-func (r *Retrier) do() error {
+func (r *AsyncRetrier) do() error {
 	r.attempt++
 	return r.retrierable.Exec()
 }
 
-func (r *Retrier) isDone() bool {
+func (r *AsyncRetrier) isDone() bool {
 	return r.attempt >= r.maxAttempt || r.done
 }

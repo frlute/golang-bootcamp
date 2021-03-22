@@ -27,10 +27,10 @@ func Test_New(t *testing.T) {
 	}
 
 	cases := []struct {
-		name            string
-		args            args
-		expectedRetrier Retrier
-		expectedErr     error
+		name                 string
+		args                 args
+		expectedAsyncRetrier AsyncRetrier
+		expectedErr          error
 	}{
 		{
 			name: "normal no error",
@@ -38,7 +38,7 @@ func Test_New(t *testing.T) {
 				ret:        new(MockRetriable),
 				maxAttempt: 5,
 			},
-			expectedRetrier: Retrier{
+			expectedAsyncRetrier: AsyncRetrier{
 				attempt:     0,
 				maxAttempt:  5,
 				retrierable: new(MockRetriable),
@@ -50,7 +50,7 @@ func Test_New(t *testing.T) {
 			args: args{
 				ret: new(MockRetriable),
 			},
-			expectedRetrier: Retrier{
+			expectedAsyncRetrier: AsyncRetrier{
 				retrierable: new(MockRetriable),
 			},
 			expectedErr: ErrMaxAttempt,
@@ -60,24 +60,24 @@ func Test_New(t *testing.T) {
 			args: args{
 				maxAttempt: 1,
 			},
-			expectedRetrier: Retrier{},
-			expectedErr:     ErrRetriableNil,
+			expectedAsyncRetrier: AsyncRetrier{},
+			expectedErr:          ErrRetriableNil,
 		},
 	}
 
 	for _, c := range cases {
 		t.Run(c.name, func(tt *testing.T) {
-			r, err := NewRetrier(c.args.ret, c.args.maxAttempt, c.args.loggerFunc)
+			r, err := NewAsyncRetrier(c.args.ret, c.args.maxAttempt, c.args.loggerFunc)
 			assert.Equal(tt, c.expectedErr, err)
 			if r != nil {
-				assert.Equal(tt, c.expectedRetrier, *r)
+				assert.Equal(tt, c.expectedAsyncRetrier, *r)
 			}
 		})
 	}
 }
 
 func Test_do(t *testing.T) {
-	r := Retrier{
+	r := AsyncRetrier{
 		retrierable: new(MockRetriable),
 	}
 
@@ -88,7 +88,7 @@ func Test_do(t *testing.T) {
 func Test_run(t *testing.T) {
 	obj := new(MockRetriable)
 
-	r := Retrier{
+	r := AsyncRetrier{
 		maxAttempt:  3,
 		retrierable: obj,
 	}
