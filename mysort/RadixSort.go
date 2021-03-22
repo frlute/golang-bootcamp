@@ -17,11 +17,11 @@ func RadixSort(data []int) {
 	}
 
 	// 获取最大位数
-	maxSize := maxBit(data)
+	// maxSize := maxBit(data)
 
-	tmp := make([]int, length)
+	// tmp := make([]int, length)
 
-	buckets := new([10]int)
+	// buckets := new([10]int)
 }
 
 func maxBit(data []int) int {

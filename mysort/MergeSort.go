@@ -20,7 +20,7 @@ func MergeSort(data []int) []int {
 	return merge(left, right, mid)
 }
 
-func merge(left, right []int, mid) []int {
+func merge(left, right []int, mid int) []int {
 	result := []int{}
 
 	// [左右]对比，是指左的第一个元素，与右边的第一个元素进行对比，哪个小，
