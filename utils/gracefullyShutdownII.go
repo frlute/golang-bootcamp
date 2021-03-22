@@ -38,7 +38,7 @@ func NewGrace(timeout time.Duration) *Grace {
 
 // Register 注册清理函数
 // TODO 考虑清理函数顺序问题
-func (g *Grace) Register(op string, f operation) {
+func (g *Grace) Register(op string, f func() error) {
 	if f == nil {
 		panic("register nil cleanup function")
 	}
