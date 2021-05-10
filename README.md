@@ -4,6 +4,8 @@ golang code playground, 本项目主要是通过 `golang` 来练习一些日常�
 TO-DO-LIST
 
 - [ ] 提交时跑测试用例，或者 commit 时通过 CI 跑测试用例
+- [ ] 参考 https://github.com/Workiva/go-datastructures
+- [ ] There are many patterns can be implemented using Go, for example Fan-in Fan-out, Generator, Job Queue, Pipeline, Semaphore, Worker Pool etc.
 
 
 ## 算法思想等总结
