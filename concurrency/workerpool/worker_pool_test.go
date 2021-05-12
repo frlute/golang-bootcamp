@@ -44,10 +44,7 @@ func Test_WorkerPool(t *testing.T) {
 		log.Printf("[main] Task [%d] has been finished with result [%d]", res.id, res.value)
 	}
 
-	for {
-		if wp.Completed() {
-			return
-		}
+	for !wp.Completed() {
 		<-waitC
 	}
 }

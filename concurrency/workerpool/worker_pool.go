@@ -5,14 +5,15 @@ import (
 )
 
 /*
-使用场景：在有限的 CPU 和 内存资源条件下，需要并发执行多个任务时，worker pool 则是一种在有限资源下最大化并发的方式
+使用场景：
+ 1. 在 CPU、内存等有限的资源条件下，需要并发执行多个任务时，worker pool 则是一种在有限资源下最大化并发的方式
 */
 
 // WorkerPool is a contract for Worker Pool implementation
 type WorkerPool interface {
 	Run()
 	AddTask(task func())
-	Completed() bool
+	Completed() bool // 判断已有任务是否执行结束
 }
 
 type workerPool struct {
@@ -34,6 +35,7 @@ func (wp *workerPool) Run() {
 	for idx := 0; idx < wp.maxWorker; idx++ {
 		wID := idx + 1
 		log.Printf("[WorkerPool] Worker %d has been spawned", wID)
+
 		go func(workerID int) {
 			for task := range wp.queuedTaskChannel {
 				log.Printf("[WorkerPool] Worker %d start processing task", workerID)
