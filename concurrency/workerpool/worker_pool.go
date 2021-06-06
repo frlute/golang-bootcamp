@@ -14,6 +14,7 @@ type WorkerPool interface {
 	Run()
 	AddTask(task func())
 	Completed() bool // 判断已有任务是否执行结束
+	// Cancel() // 支持取消
 }
 
 type workerPool struct {
