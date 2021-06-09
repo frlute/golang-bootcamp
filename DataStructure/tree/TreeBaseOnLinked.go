@@ -1,7 +1,7 @@
 package tree
 
 import (
-	_ "github.com/frlute/go-playground/linkedlist"
+	_ "github.com/frlute/go-playground/DataStructure/linkedlist"
 )
 
 // NodeBaseOnLinked _
