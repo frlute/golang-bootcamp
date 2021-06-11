@@ -1,7 +1,7 @@
 package queue
 
 import (
-	ll "github.com/frlute/go-playground/DataStructure/linkedlist"
+	ll "github.com/frlute/go-playground/DSA/linkedlist"
 )
 
 // LinkedListQueue _
