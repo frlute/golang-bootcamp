@@ -1,4 +1,4 @@
-module github.com/frlute/go-playground
+module github.com/frlute/golang-bootcamp
 
 go 1.15
 

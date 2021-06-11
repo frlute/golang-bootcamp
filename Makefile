@@ -1,6 +1,6 @@
 # 定义项目基本信息
 CURRENT_GIT_GROUP := github.com/frlute
-CURRENT_GIT_REPO  := go-playground
+CURRENT_GIT_REPO  := golang-bootcamp
 
 COMMONENVVAR       = GOOS=linux GOARCH=amd64
 BUILDENVVAR        = CGO_ENABLED=0

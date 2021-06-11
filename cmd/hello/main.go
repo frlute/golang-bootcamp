@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/frlute/go-playground/cmd/hello/morestrings"
+	"github.com/frlute/golang-bootcamp/cmd/hello/morestrings"
 )
 
 func main() {

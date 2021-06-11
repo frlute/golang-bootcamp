@@ -1,7 +1,7 @@
 package tree
 
 import (
-	_ "github.com/frlute/go-playground/DSA/linkedlist"
+	_ "github.com/frlute/golang-bootcamp/DSA/linkedlist"
 )
 
 // NodeBaseOnLinked _

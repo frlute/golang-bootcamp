@@ -1,7 +1,7 @@
 package search
 
 import (
-	"github.com/frlute/go-playground/DSA/tree"
+	"github.com/frlute/golang-bootcamp/DSA/tree"
 )
 
 //BST BinarySearchTree

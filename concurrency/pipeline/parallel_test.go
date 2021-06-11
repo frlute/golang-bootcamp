@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// 执行 go test -benchmem -run=^$ -bench ^BenchmarkMD5All github.com/frlute/go-playground/concurrency/pipeline -v
+// 执行 go test -benchmem -run=^$ -bench ^BenchmarkMD5All github.com/frlute/golang-bootcamp/concurrency/pipeline -v
 
 type execFunc func(string) (map[string][md5.Size]byte, error)
 
