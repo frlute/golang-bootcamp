@@ -1,5 +1,5 @@
 # golang-bootcamp
-golang code boot camp, 本项目主要是通过 `golang` 来练习一些日常遇到的代码示例。
+golang code bootcamp, 本项目主要是通过 `golang` 来练习一些日常遇到的代码示例。
 
 ## Data Structure
 
