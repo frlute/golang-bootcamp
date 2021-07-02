@@ -18,7 +18,7 @@ func Test_twoSum(t *testing.T) {
 			output: nil,
 		},
 		{
-			input:  []int{1, 2, 5, 10, 8, 6},
+			input:  []int{1, 2, 5, 6, 8, 10},
 			target: 13,
 			output: []int{2, 4},
 		},
@@ -30,6 +30,9 @@ func Test_twoSum(t *testing.T) {
 			assert.Equal(t, item.output, actual)
 
 			assert.Equal(t, item.output, twoSumBasedHash(item.input, item.target))
+
+			// 此解法数组必须已排序
+			assert.Equal(t, item.output, twoSumBasedInvariants(item.input, item.target))
 		})
 	}
 }

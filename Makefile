@@ -27,9 +27,8 @@ linux_build: deps
 	$(COMMONENVVAR) $(BUILDENVVAR) make build
 
 test:
-	mkdir coverage
+	mkdir -p coverage
 	make test_DSA
-	make test_search
 
 coverage:
 	find ./coverage -name "coverage.*.out.*" -exec tail +2 {} >> ./coverage/coverage.out \;
@@ -47,10 +46,6 @@ test_DSA:
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/search -coverprofile=./coverage/coverage.dsa.out.6 -covermode=count -coverpkg=./...
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/hash -coverprofile=./coverage/coverage.dsa.out.7 -covermode=count -coverpkg=./...
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/graph -coverprofile=./coverage/coverage.dsa.out.8 -covermode=count -coverpkg=./...
-
-test_search:
-	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/search/BinarySearch -coverprofile=./coverage/coverage.search.out -covermode=count -coverpkg=./...
-	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/search/StringSearch -coverprofile=./coverage/coverage.search.out.1 -covermode=count -coverpkg=./...
 
 clean:
 	rm -rf coverage

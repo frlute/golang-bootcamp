@@ -42,3 +42,25 @@ func twoSumBasedHash(items []int, target int) []int {
 
 	return nil
 }
+
+// 利用不变量思想、收缩范围，此种解法需要数组已排序, 时间复杂度 O(n)
+func twoSumBasedInvariants(items []int, target int) []int {
+	length := len(items)
+	if length <= 1 {
+		return nil
+	}
+
+	left, right := 0, length-1
+	for left <= right {
+		value := items[left] + items[right]
+		if value == target {
+			return []int{left, right}
+		} else if value > target {
+			right--
+		} else {
+			left++
+		}
+	}
+
+	return nil
+}

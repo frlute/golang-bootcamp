@@ -1,7 +1,6 @@
 package array
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -51,10 +50,6 @@ func Test_removeElement(t *testing.T) {
 
 	for _, fn := range removeFunctions {
 		for _, item := range cases {
-			// 用于对照
-			originInput := make([]int, len(item.input))
-			copy(originInput, item.input)
-
 			// 因原地修改数组，故需要每次调用时把参数隔离开，避免不同删除删除相互影响
 			input := make([]int, len(item.input))
 			copy(input, item.input)
@@ -62,13 +57,12 @@ func Test_removeElement(t *testing.T) {
 			t.Run(item.name, func(t *testing.T) {
 				res := fn(input, item.target)
 
-				fmt.Printf("%+v\n", item)
 				if item.name != "error case" {
 					assert.Equal(t, item.output, res)
 				}
 				// 验证下数组内容是否符合要求,避免实现只是计元素个数, 如在 removeElement 中注释赋值的语句即可出现此错误
 				if item.name != "删除元素在尾部" {
-					assert.NotEqual(t, originInput, input)
+					assert.NotEqual(t, item.input, input)
 				}
 			})
 		}
