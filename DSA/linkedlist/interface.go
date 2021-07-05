@@ -24,4 +24,8 @@ type LinkedList interface {
 
 	// reset linked list
 	Reset()
+
+	// -----------以上为基本操作---------
+	// 下面是一些应用
+	// HasCycle() bool
 }

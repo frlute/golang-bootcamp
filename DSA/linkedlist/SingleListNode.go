@@ -4,15 +4,18 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-
-	"github.com/frlute/golang-bootcamp/DSA/utils"
 )
+
+type LinkedListNode struct {
+	Value interface{}
+	Next  *LinkedListNode
+}
 
 // SingleLinkedNode Definition for singly-linked list.
 type SingleLinkedNode struct {
-	head *utils.Node
+	head *LinkedListNode
 	// 记录 tail 节点方便部分操作
-	tail *utils.Node
+	tail *LinkedListNode
 	// 从零开始为头结点
 	length int
 	sync.Mutex
@@ -24,7 +27,7 @@ func CreateSingleLinkedNode(value interface{}) LinkedList {
 }
 
 func newSingleLinkedNode(value interface{}) *SingleLinkedNode {
-	node := &utils.Node{
+	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
@@ -36,7 +39,7 @@ func newSingleLinkedNode(value interface{}) *SingleLinkedNode {
 
 // Append adds an item to the end of the linked list
 func (ll *SingleLinkedNode) Append(value interface{}) {
-	node := &utils.Node{
+	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
@@ -54,7 +57,7 @@ func (ll *SingleLinkedNode) Append(value interface{}) {
 
 // Prepend add an item to the begin of the linked list
 func (ll *SingleLinkedNode) Prepend(value interface{}) {
-	node := &utils.Node{
+	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
@@ -80,13 +83,13 @@ func (ll *SingleLinkedNode) Insert(value interface{}, pos int) error {
 	} else if pos == 0 {
 		ll.Prepend(value)
 	} else {
-		node := &utils.Node{
+		node := &LinkedListNode{
 			Value: value,
 			Next:  nil,
 		}
 
 		head := ll.head
-		var preNode *utils.Node
+		var preNode *LinkedListNode
 		for i := 0; i < ll.length; i++ {
 			if i == pos {
 				node.Next = head
@@ -110,7 +113,7 @@ func (ll *SingleLinkedNode) RemoveAt(pos int) {
 	}
 
 	head := ll.head
-	var preNode *utils.Node
+	var preNode *LinkedListNode
 	for i := 0; i < ll.length; i++ {
 		if i == pos {
 			// 删除的位置是尾节点是，前置节点指为 nil 即可
@@ -135,7 +138,8 @@ func (ll *SingleLinkedNode) RemoveAt(pos int) {
 // Delete delete the specific item in linked list
 func (ll *SingleLinkedNode) Delete(value interface{}) {
 	head := ll.head
-	var preNode *utils.Node
+	var preNode *LinkedListNode
+	// TODO 待用 for head.Next != nil 优化
 	for pos := 0; pos < ll.length; pos++ {
 		if head.Value == value {
 			// 尾节点时特殊处理
@@ -188,6 +192,7 @@ func (ll *SingleLinkedNode) Size() int {
 }
 
 // Display a string representation of the list
+// TODO 如果是循环链表时，disply 和 string 目前会无限循环，需要改为按 pos 遍历
 func (ll *SingleLinkedNode) Display() {
 	if ll.head == nil {
 		return
@@ -232,31 +237,44 @@ func (ll *SingleLinkedNode) Reset() {
 	ll.length = 0
 }
 
-// func (ll *SingleLinkedNode) Search(value interface{}) *SingleLinkedNode {
-// 	for node != nil && node.Value != value {
-// 		node = node.Next
-// 	}
-// 	return node
-// }
+// 快慢指针法
+func (ll *SingleLinkedNode) hasCycle() bool {
+	head := ll.head
+	if head == nil || head.Next == nil {
+		return false
+	}
 
-// // HasCycle 快慢指针法
-// func (ll *SingleLinkedNode) HasCycle() bool {
-// 	if node == nil || node.Next == nil {
-// 		return false
-// 	}
-// 	fastNode := node.Next
-// 	for fastNode != nil && fastNode.Next != nil {
-// 		node = node.Next
-// 		// 注意这儿是 fastNode.Next.Next
-// 		fastNode = fastNode.Next.Next
+	fastNode := head.Next
+	for fastNode != nil && fastNode.Next != nil {
+		head = head.Next
+		// 注意这儿是 fastNode.Next.Next, 三个点成环
+		fastNode = fastNode.Next.Next
 
-// 		// 后判断因为三个节点才能成环
-// 		if fastNode == node {
-// 			return true
-// 		}
-// 	}
-// 	return false
-// }
+		if fastNode == head {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (ll *SingleLinkedNode) hasCycleBasedHash() bool {
+	head := ll.head
+	if head == nil || head.Next == nil {
+		return false
+	}
+
+	cached := make(map[*LinkedListNode]struct{}, ll.length)
+	for head.Next != nil {
+		if _, ok := cached[head]; ok {
+			return true
+		}
+		cached[head] = struct{}{}
+		head = head.Next
+
+	}
+	return false
+}
 
 // // HasCycleWithHash 哈希法
 // func (ll *SingleLinkedNode) HasCycleWithHash() bool {

@@ -137,14 +137,22 @@ func Test_IndexOf(t *testing.T) {
 	as.Equal(-1, ll.IndexOf("five"))
 }
 
-// func Test_HasCycle(t *testing.T) {
-// 	l := NewLinkedNode(1)
+func Test_HasCycle(t *testing.T) {
+	as := assert.New(t)
 
-// 	l2 := l.InsertAfter(l, 2)
-// 	l3 := l2.InsertAfter(l2, 3)
+	ll.Append("one")
+	ll.Append("two")
+	ll.Append("three")
 
-// 	// Create a loop for testing
-// 	l3.Next = l
+	// Create a loop for testing
+	tailNode := ll.tail
+	tailNode.Next = ll.head
 
-// 	assert.Equal(t, true, l.HasCycle())
-// }
+	// TODO 验证 Display 和 String，目前如果是循环链表时存在 bug
+	// ll.Display()
+	// as.Equal("Single Linked List: one->two->three->one\n", ll.String())
+
+	as.Equal(true, ll.hasCycle())
+	as.Equal(true, ll.hasCycleBasedHash())
+	ll.Reset()
+}

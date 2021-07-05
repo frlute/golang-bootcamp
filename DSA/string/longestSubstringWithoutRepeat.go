@@ -7,7 +7,7 @@ package string
 	- 子字符串不能存在重复的字符
 
 解法：
-	- 收缩
+	- 收缩区间、双指针法
 */
 
 func longestSubstringWithoutRepeat(s string) int {
@@ -25,7 +25,7 @@ func longestSubstringWithoutRepeat(s string) int {
 		right++
 
 		cached[str]++
-		// 此时用 for 因不一定已跑过的字符首个条件满足了，可能是最后一个满足了，故需要循环判断是否 left 是否继续
+		// 此时用 for 因不一定已跑过的字符是首个条件满足了，可能是最后一个满足了，故需要循环判断收缩 left 位置
 		for cached[str] > 1 {
 			d := s[left]
 			left++
