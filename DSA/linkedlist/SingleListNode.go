@@ -11,11 +11,11 @@ type LinkedListNode struct {
 	Next  *LinkedListNode
 }
 
-// SingleLinkedNode Definition for singly-linked list.
-type SingleLinkedNode struct {
-	head *LinkedListNode
+// SingleLinkedList Definition for singly-linked list.
+type SingleLinkedList struct {
+	Head *LinkedListNode
 	// 记录 tail 节点方便部分操作
-	tail *LinkedListNode
+	Tail *LinkedListNode
 	// 从零开始为头结点
 	length int
 	sync.Mutex
@@ -26,56 +26,56 @@ func CreateSingleLinkedNode(value interface{}) LinkedList {
 	return newSingleLinkedNode(value)
 }
 
-func newSingleLinkedNode(value interface{}) *SingleLinkedNode {
+func newSingleLinkedNode(value interface{}) *SingleLinkedList {
 	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
-	return &SingleLinkedNode{
-		head: node,
-		tail: node,
+	return &SingleLinkedList{
+		Head: node,
+		Tail: node,
 	}
 }
 
 // Append adds an item to the end of the linked list
-func (ll *SingleLinkedNode) Append(value interface{}) {
+func (ll *SingleLinkedList) Append(value interface{}) {
 	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
 	// TODO ll == nil 时需要考虑吗，目前来说 ll 不能为指针
-	if ll.head == nil {
-		ll.head = node
-		ll.tail = node
+	if ll.Head == nil {
+		ll.Head = node
+		ll.Tail = node
 	} else {
-		ll.tail.Next = node
-		ll.tail = node
+		ll.Tail.Next = node
+		ll.Tail = node
 	}
 
 	ll.length++
 }
 
 // Prepend add an item to the begin of the linked list
-func (ll *SingleLinkedNode) Prepend(value interface{}) {
+func (ll *SingleLinkedList) Prepend(value interface{}) {
 	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
 	}
 
-	head := ll.head
+	head := ll.Head
 	if head == nil {
-		ll.head = node
-		ll.tail = node
+		ll.Head = node
+		ll.Tail = node
 	} else {
 		node.Next = head
-		ll.head = node
+		ll.Head = node
 	}
 
 	ll.length++
 }
 
 // Insert add an item to the specific position in linked list
-func (ll *SingleLinkedNode) Insert(value interface{}, pos int) error {
+func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
 	if ll.length < pos {
 		return fmt.Errorf("pos %d it out of the linked list %d", pos, ll.length)
 	} else if ll.Size() == pos {
@@ -88,7 +88,7 @@ func (ll *SingleLinkedNode) Insert(value interface{}, pos int) error {
 			Next:  nil,
 		}
 
-		head := ll.head
+		head := ll.Head
 		var preNode *LinkedListNode
 		for i := 0; i < ll.length; i++ {
 			if i == pos {
@@ -106,22 +106,22 @@ func (ll *SingleLinkedNode) Insert(value interface{}, pos int) error {
 }
 
 // RemoveAt remove the item at the specified position item in linked list
-func (ll *SingleLinkedNode) RemoveAt(pos int) {
+func (ll *SingleLinkedList) RemoveAt(pos int) {
 	if ll.length <= pos {
 		fmt.Printf("pos %d it out of the linked list %d\n", pos, ll.length)
 		return
 	}
 
-	head := ll.head
+	head := ll.Head
 	var preNode *LinkedListNode
 	for i := 0; i < ll.length; i++ {
 		if i == pos {
 			// 删除的位置是尾节点是，前置节点指为 nil 即可
 			if head.Next == nil {
-				ll.tail = preNode
+				ll.Tail = preNode
 				// 只有一个节点时
 				if preNode == nil {
-					ll.head = nil
+					ll.Head = nil
 					break
 				}
 			}
@@ -136,8 +136,8 @@ func (ll *SingleLinkedNode) RemoveAt(pos int) {
 }
 
 // Delete delete the specific item in linked list
-func (ll *SingleLinkedNode) Delete(value interface{}) {
-	head := ll.head
+func (ll *SingleLinkedList) Delete(value interface{}) {
+	head := ll.Head
 	var preNode *LinkedListNode
 	// TODO 待用 for head.Next != nil 优化
 	for pos := 0; pos < ll.length; pos++ {
@@ -148,9 +148,9 @@ func (ll *SingleLinkedNode) Delete(value interface{}) {
 					preNode.Next = head.Next
 				} else {
 					// 只有一个节点时
-					ll.head = nil
+					ll.Head = nil
 				}
-				ll.tail = preNode
+				ll.Tail = preNode
 			} else {
 				preNode.Next = head.Next
 			}
@@ -163,9 +163,9 @@ func (ll *SingleLinkedNode) Delete(value interface{}) {
 }
 
 // IndexOf get the value position in linked list
-func (ll *SingleLinkedNode) IndexOf(value interface{}) int {
+func (ll *SingleLinkedList) IndexOf(value interface{}) int {
 
-	head := ll.head
+	head := ll.Head
 	for pos := 0; pos < ll.length; pos++ {
 		if head.Value == value {
 			return pos
@@ -176,16 +176,16 @@ func (ll *SingleLinkedNode) IndexOf(value interface{}) int {
 }
 
 // IsEmpty judge the linked list is empty
-func (ll *SingleLinkedNode) IsEmpty() bool {
-	if ll == nil || ll.head == nil {
+func (ll *SingleLinkedList) IsEmpty() bool {
+	if ll == nil || ll.Head == nil {
 		return true
 	}
 	return false
 }
 
 // Size get the linked list length
-func (ll *SingleLinkedNode) Size() int {
-	if ll.head == nil {
+func (ll *SingleLinkedList) Size() int {
+	if ll.Head == nil {
 		return 0
 	}
 	return ll.length
@@ -193,13 +193,13 @@ func (ll *SingleLinkedNode) Size() int {
 
 // Display a string representation of the list
 // TODO 如果是循环链表时，disply 和 string 目前会无限循环，需要改为按 pos 遍历
-func (ll *SingleLinkedNode) Display() {
-	if ll.head == nil {
+func (ll *SingleLinkedList) Display() {
+	if ll.Head == nil {
 		return
 	}
 	fmt.Printf("Display Single Linked List: ")
 
-	head := ll.head
+	head := ll.Head
 	for head != nil {
 		if head.Next == nil {
 			fmt.Printf("%v\n", head.Value)
@@ -211,14 +211,14 @@ func (ll *SingleLinkedNode) Display() {
 }
 
 // String a string representation of the list
-func (ll *SingleLinkedNode) String() string {
-	if ll.head == nil {
+func (ll *SingleLinkedList) String() string {
+	if ll.Head == nil {
 		return "This is a empty single linked list."
 	}
 	var output strings.Builder
 	output.WriteString("Single Linked List: ")
 
-	head := ll.head
+	head := ll.Head
 	for head != nil {
 		if head.Next == nil {
 			output.WriteString(fmt.Sprintf("%v\n", head.Value))
@@ -231,15 +231,17 @@ func (ll *SingleLinkedNode) String() string {
 }
 
 // Reset reset all linked list
-func (ll *SingleLinkedNode) Reset() {
-	ll.head = nil
-	ll.tail = nil
+func (ll *SingleLinkedList) Reset() {
+	ll.Head = nil
+	ll.Tail = nil
 	ll.length = 0
 }
 
+/*------------------以下为练习对应的实现------------*/
+
 // 快慢指针法
-func (ll *SingleLinkedNode) hasCycle() bool {
-	head := ll.head
+func (ll *SingleLinkedList) hasCycle() bool {
+	head := ll.Head
 	if head == nil || head.Next == nil {
 		return false
 	}
@@ -258,8 +260,9 @@ func (ll *SingleLinkedNode) hasCycle() bool {
 	return false
 }
 
-func (ll *SingleLinkedNode) hasCycleBasedHash() bool {
-	head := ll.head
+// 哈希法
+func (ll *SingleLinkedList) hasCycleBasedHash() bool {
+	head := ll.Head
 	if head == nil || head.Next == nil {
 		return false
 	}
@@ -276,15 +279,37 @@ func (ll *SingleLinkedNode) hasCycleBasedHash() bool {
 	return false
 }
 
-// // HasCycleWithHash 哈希法
-// func (ll *SingleLinkedNode) HasCycleWithHash() bool {
-// 	cache := make(map[*SingleLinkedNode]struct{})
-// 	for node.Next != nil {
-// 		if _, ok := cache[node]; ok {
-// 			return true
-// 		}
-// 		cache[node] = struct{}{}
-// 		node = node.Next
-// 	}
-// 	return false
-// }
+/*
+leetcode [19] Remove Nth Node From End of List
+
+限制条件:
+	* The number of nodes in the list is sz.
+	* 1 <= sz <= 30
+	* 0 <= Node.val <= 100
+	* 1 <= n <= sz
+
+解法：
+	- 双指针法
+	- 先确定好节点位置，然后遍历当节点 == nil 时说明已经确定的求解头结点的位置
+*/
+func (ll *SingleLinkedList) removeNthFromEnd(pos int) {
+	fastNode, slowNode := ll.Head, ll.Head
+	// 首先移到从尾节点到 n 对应的节点
+	for ; pos > 0; pos-- {
+		fastNode = fastNode.Next
+	}
+
+	ll.length--
+	// 因 n 大于等于链表长度，此时相当于 n = len(ll), 即删除头结点
+	if fastNode == nil {
+		ll.Head = ll.Head.Next
+		return
+	}
+
+	for fastNode.Next != nil && fastNode != nil {
+		slowNode = slowNode.Next
+		fastNode = fastNode.Next
+	}
+
+	slowNode.Next = slowNode.Next.Next
+}
