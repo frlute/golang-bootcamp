@@ -159,7 +159,7 @@ func Test_HasCycle(t *testing.T) {
 }
 
 func Test_removeNthFromEnd(t *testing.T) {
-	// as := assert.New(t)
+	as := assert.New(t)
 
 	cases := []struct {
 		input  []int
@@ -188,7 +188,7 @@ func Test_removeNthFromEnd(t *testing.T) {
 		for _, item := range args.input {
 			list.Append(item)
 		}
-		list.Display()
+
 		name := fmt.Sprintf("删除链表%+v倒数第%d个节点", list.String(), args.pos)
 		t.Run(name, func(t *testing.T) {
 			list.removeNthFromEnd(args.pos)
@@ -197,7 +197,83 @@ func Test_removeNthFromEnd(t *testing.T) {
 				expectList.Append(item)
 			}
 
-			assert.Equal(t, expectList.Size(), list.Size())
+			as.Equal(expectList.Size(), list.Size())
+			as.Equal(expectList.String(), list.String())
+		})
+	}
+}
+
+func Test_reverse(t *testing.T) {
+	as := assert.New(t)
+
+	cases := []struct {
+		input  []int
+		output []int
+	}{
+		{
+			input:  []int{1, 2, 3, 4, 5},
+			output: []int{5, 4, 3, 2, 1},
+		},
+		{
+			input:  []int{1, 2},
+			output: []int{2, 1},
+		},
+		{
+			input:  []int{},
+			output: []int{},
+		},
+	}
+
+	for _, args := range cases {
+		var list SingleLinkedList
+		for _, item := range args.input {
+			list.Append(item)
+		}
+
+		name := fmt.Sprintf("反转链表%+v", list.String())
+		t.Run(name, func(t *testing.T) {
+			list.reverse()
+			var expectList SingleLinkedList
+			for _, item := range args.output {
+				expectList.Append(item)
+			}
+
+			as.Equal(expectList.String(), list.String())
+		})
+	}
+
+	// TODO 递归法测试没成功，之后补充上
+}
+
+func Test_oddEvenList(t *testing.T) {
+	cases := []struct {
+		input  []int
+		output []int
+	}{
+		{
+			input:  []int{1, 2, 3, 4, 5},
+			output: []int{1, 3, 5, 2, 4},
+		},
+		{
+			input:  []int{2, 1, 3, 5, 6, 4, 7},
+			output: []int{2, 3, 6, 7, 1, 5, 4},
+		},
+	}
+
+	for _, args := range cases {
+		var list SingleLinkedList
+		for _, item := range args.input {
+			list.Append(item)
+		}
+
+		name := fmt.Sprintf("oddEven链表%+v", list.String())
+		t.Run(name, func(t *testing.T) {
+			list.oddEvenList()
+			var expectList SingleLinkedList
+			for _, item := range args.output {
+				expectList.Append(item)
+			}
+
 			assert.Equal(t, expectList.String(), list.String())
 		})
 	}
