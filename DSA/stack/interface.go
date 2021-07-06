@@ -1,8 +1,15 @@
 package stack
 
 type Stack interface {
-	Push(item interface{}) bool
+	// Pushing (storing) an element on the stack.
+	Push(item interface{})
 	Pop() interface{}
-	Len() int64
-	Cap() int64
+
+	// get the top data element of the stack, without removing it.
+	Peek() interface{}
+	IsFull() bool
+	IsEmpty() bool
+
+	Flush()
+	Display()
 }
