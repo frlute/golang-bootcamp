@@ -89,3 +89,14 @@ func (dl *DoubleLinkedList) Reset() {
 	dl.tail = nil
 	dl.length = 0
 }
+
+// TODO 双链表特殊的操作
+
+// DisplayForward display the complete list in a backward manner.
+func (dl *DoubleLinkedList) DisplayForward() {
+}
+
+// InsertBefore add an item to the specific position before in linked list
+func (dl *DoubleLinkedList) InsertBefore(value interface{}, pos int) error {
+	return nil
+}
