@@ -1,8 +1,14 @@
 package queue
 
 type Queue interface {
-	Enqueue(item interface{}) bool
+	//  add (store) an item to the queue.
+	Enqueue(item interface{})
+	// remove (access) an item from the queue.
 	Dequeue() interface{}
+	// Gets the element at the front of the queue without removing it.
+	Peek() interface{}
+	IsFull() bool
+	IsEmpty() bool
 }
 
 // Deque 双端队列

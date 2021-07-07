@@ -8,7 +8,7 @@ import (
 // StackBasedArray _
 type StackBasedArray struct {
 	items    []interface{}
-	length   int64 // 栈中元素长度，从 0 开始
+	top      int64 // 数组中元素顶点位置，从 0 开始
 	capacity int64 // 栈容量
 	sync.Mutex
 	// dynamic bool  // 是否动态扩容
@@ -23,7 +23,7 @@ type Options struct {
 func NewStackBasedArray(capacity int64) Stack {
 	return &StackBasedArray{
 		items:    make([]interface{}, capacity),
-		length:   0,
+		top:      0,
 		capacity: capacity,
 	}
 }
@@ -44,8 +44,8 @@ func (s *StackBasedArray) Push(item interface{}) {
 	}
 	// TODO 注意并发
 	// s.items = append(s.items, item)
-	s.items[s.length] = item
-	s.length++
+	s.items[s.top] = item
+	s.top++
 
 	// return true
 }
@@ -54,36 +54,39 @@ func (s *StackBasedArray) Push(item interface{}) {
 func (s *StackBasedArray) Pop() interface{} {
 	// 栈为空，则直接返回null
 	if s.IsEmpty() {
-		fmt.Println("Stack is empty.")
+		fmt.Println("Could not retrieve data, Stack is empty.")
 		return nil
 	}
 
 	// 返回下标为count-1的数组元素，并且栈中元素个数count减一
-	item := s.items[s.length-1]
-	s.items[s.length-1] = nil
-	s.length--
+	// item := s.items[s.top-1]
+	// s.items[s.top-1] = nil
+	// s.top--
+	// 改进方式，顺序栈可以不进行实际的 element 删除，只是移动 top 的位置向下移动一位
+	item := s.items[s.top-1]
+	s.top--
 
 	return item
 }
 
 // Peek get the top data element of the stack, without removing it.
 func (s *StackBasedArray) Peek() interface{} {
-	return s.items[s.length-1]
+	return s.items[s.top-1]
 }
 
 // IsFull check if stack is full.
 func (s *StackBasedArray) IsFull() bool {
-	return s.length == s.capacity
+	return s.top == s.capacity
 }
 
 // IsEmpty check if stack is empty.
 func (s *StackBasedArray) IsEmpty() bool {
-	return s.length == 0
+	return s.top == 0
 }
 
 // Flush _
 func (s *StackBasedArray) Flush() {
-	s.length = 0
+	s.top = 0
 }
 
 // Display _

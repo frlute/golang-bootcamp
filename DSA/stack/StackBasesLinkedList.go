@@ -8,7 +8,7 @@ import (
 )
 
 type StackBasedLinkedList struct {
-	head     *ll.LinkedListNode
+	top      *ll.LinkedListNode
 	length   int64 // 栈中元素长度，从 0 开始
 	capacity int64 // 栈容量
 	sync.Mutex
@@ -21,7 +21,7 @@ func NewStackBasedLinkedList(capacity int64) Stack {
 	}
 
 	return &StackBasedLinkedList{
-		head:     &ll.LinkedListNode{},
+		top:      &ll.LinkedListNode{},
 		length:   0,
 		capacity: capacity,
 	}
@@ -29,15 +29,15 @@ func NewStackBasedLinkedList(capacity int64) Stack {
 
 func (s *StackBasedLinkedList) Push(item interface{}) {
 	if s.IsFull() {
-		fmt.Println("Stack is full.")
+		fmt.Println("Could not insert data, Stack is full.")
 		return
 	}
 	node := &ll.LinkedListNode{
 		Value: item,
 		Next:  nil,
 	}
-	node.Next = s.head
-	s.head = node
+	node.Next = s.top
+	s.top = node
 	s.length++
 }
 
@@ -47,15 +47,15 @@ func (s *StackBasedLinkedList) Pop() interface{} {
 		fmt.Println("Stack is empty.")
 		return nil
 	}
-	value := s.head.Value
-	s.head = s.head.Next
+	value := s.top.Value
+	s.top = s.top.Next
 	s.length--
 	return value
 }
 
 // Peek get the top data element of the stack, without removing it.
 func (s *StackBasedLinkedList) Peek() interface{} {
-	return s.head.Value
+	return s.top.Value
 }
 
 // IsFull check if stack is full.
@@ -70,14 +70,14 @@ func (s *StackBasedLinkedList) IsEmpty() bool {
 
 // Flush _
 func (s *StackBasedLinkedList) Flush() {
-	s.head = nil
+	s.top = nil
 	s.length = 0
 }
 
 // Display _
 func (s *StackBasedLinkedList) Display() {
 	list := &ll.SingleLinkedList{
-		Head: s.head,
+		Head: s.top,
 	}
 	list.Display()
 }

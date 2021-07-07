@@ -8,6 +8,8 @@ type CirculationQueue struct {
 	tail     int //队尾下标
 }
 
+// TODO 循环队列是不是用循环链表更好一些
+
 // NewCirculationQueue _
 func NewCirculationQueue(capacity int) *CirculationQueue {
 	if capacity == 0 {
