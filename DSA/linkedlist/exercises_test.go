@@ -245,12 +245,28 @@ func Test_deleteDuplicates(t *testing.T) {
 			input:  []int{1, 1, 2, 3, 3},
 			output: []int{1, 2, 3},
 		},
+		{
+			input:  []int{1, 1, 1},
+			output: []int{1},
+		},
 	}
 
 	for _, test := range tests {
 		input := numberArrayToLinkedlist(test.input)
 
 		res := deleteDuplicates(input)
+		list := &SingleLinkedList{Head: res}
+
+		expectNode := numberArrayToLinkedlist(test.output)
+		expectList := &SingleLinkedList{Head: expectNode}
+
+		assert.Equal(t, expectList.String(), list.String())
+	}
+
+	for _, test := range tests {
+		input := numberArrayToLinkedlist(test.input)
+
+		res := deleteDuplicatesV1(input)
 		list := &SingleLinkedList{Head: res}
 
 		expectNode := numberArrayToLinkedlist(test.output)

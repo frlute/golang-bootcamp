@@ -278,3 +278,17 @@ func deleteDuplicates(head *LinkedListNode) *LinkedListNode {
 
 	return result
 }
+
+// 迭代法: 时间复杂度 O(n), 空间复杂度 O(1)
+func deleteDuplicatesV1(head *LinkedListNode) *LinkedListNode {
+	cur := head
+	for cur != nil && cur.Next != nil {
+		if cur.Value == cur.Next.Value {
+			cur.Next = cur.Next.Next
+		} else {
+			cur = cur.Next
+		}
+	}
+
+	return head
+}
