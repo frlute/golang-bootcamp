@@ -79,6 +79,46 @@ func twoSum(items []int, target int) []int {
 	return nil
 }
 
+// 哈希法 时间复杂度 O(n), 空间复杂度 O(n), 应用以时间换空间的思想
+func twoSumBasedHash(items []int, target int) []int {
+	length := len(items)
+	if length <= 1 {
+		return nil
+	}
+	cached := make(map[int]int, length)
+	for index, value := range items {
+		expectValue := target - value
+		if idx, ok := cached[expectValue]; ok {
+			return []int{idx, index}
+		}
+		cached[value] = index
+	}
+
+	return nil
+}
+
+// 利用不变量思想、收缩范围，此种解法需要数组已排序, 时间复杂度 O(n)
+func twoSumBasedInvariants(items []int, target int) []int {
+	length := len(items)
+	if length <= 1 {
+		return nil
+	}
+
+	left, right := 0, length-1
+	for left <= right {
+		value := items[left] + items[right]
+		if value == target {
+			return []int{left, right}
+		} else if value > target {
+			right--
+		} else {
+			left++
+		}
+	}
+
+	return nil
+}
+
 /*
 删除数组中的元素，并返回新的数组长度
 要求：
@@ -137,42 +177,15 @@ func removeElementV2(items []int, target int) int {
 	return length - pos
 }
 
-// 哈希法 时间复杂度 O(n), 空间复杂度 O(n), 应用以时间换空间的思想
-func twoSumBasedHash(items []int, target int) []int {
-	length := len(items)
-	if length <= 1 {
-		return nil
-	}
-	cached := make(map[int]int, length)
-	for index, value := range items {
-		expectValue := target - value
-		if idx, ok := cached[expectValue]; ok {
-			return []int{idx, index}
-		}
-		cached[value] = index
-	}
-
-	return nil
-}
-
-// 利用不变量思想、收缩范围，此种解法需要数组已排序, 时间复杂度 O(n)
-func twoSumBasedInvariants(items []int, target int) []int {
-	length := len(items)
-	if length <= 1 {
-		return nil
-	}
-
-	left, right := 0, length-1
-	for left <= right {
-		value := items[left] + items[right]
-		if value == target {
-			return []int{left, right}
-		} else if value > target {
-			right--
-		} else {
-			left++
+func plusOne(digits []int) []int {
+	length := len(digits)
+	for i := length - 1; i >= 0; i-- {
+		digits[i]++
+		digits[i] = digits[i] % 10
+		if digits[i] != 0 {
+			return digits
 		}
 	}
 
-	return nil
+	return append([]int{1}, digits...)
 }
