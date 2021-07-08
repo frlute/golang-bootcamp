@@ -14,7 +14,7 @@ type LinkedListNode struct {
 // SingleLinkedList Definition for singly-linked list.
 type SingleLinkedList struct {
 	Head *LinkedListNode
-	// 记录 tail 节点方便部分操作
+	// 记录 tail 节点方便部分操作, 减少不断循环获取尾节点
 	Tail *LinkedListNode
 	// 从零开始为头结点
 	length int

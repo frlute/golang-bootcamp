@@ -1,6 +1,8 @@
 package linkedlist
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 此文件主要用来做练习题
 /*
@@ -249,4 +251,30 @@ func swapPairsIteration(head *LinkedListNode) *LinkedListNode {
 	test.Display()
 
 	return dummyHead.Next
+}
+
+/*
+[83] Remove Duplicates from Sorted List
+方法： 哈希
+算法分析: 时间复杂度 O(n), 空间复杂度 O(n)
+*/
+func deleteDuplicates(head *LinkedListNode) *LinkedListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	prev := head
+	result := prev
+
+	cached := make(map[interface{}]struct{})
+	for head != nil {
+		if _, ok := cached[head.Value]; ok {
+			prev.Next = head.Next
+		} else {
+			cached[head.Value] = struct{}{}
+			prev = head
+		}
+		head = head.Next
+	}
+
+	return result
 }
