@@ -51,12 +51,16 @@ func Test_reverseStingWithoutAffectSpecialChar(t *testing.T) {
 			input:  "Ab,c,de!$",
 			output: "ed,c,bA!$",
 		},
+		{
+			input:  "a!!!b.c.d,e'f,ghi",
+			output: "i!!!h.g.f,e'd,cba",
+		},
 	}
 
 	for _, test := range tests {
 		name := fmt.Sprintf("test reverseStingWithoutAffectSpecialChar(%s)", test.input)
 		t.Run(name, func(t *testing.T) {
-			res := reverseStingWithoutAffectSpecialChar(test.input)
+			res := reverseStringWithoutAffectSpecialChar(test.input)
 			as.Equal(test.output, res)
 		})
 	}

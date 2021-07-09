@@ -5,7 +5,7 @@ package string
 地址: https://www.geeksforgeeks.org/reverse-a-string-without-affecting-special-characters/
 */
 
-func reverseStingWithoutAffectSpecialChar(str string) string {
+func reverseStringWithoutAffectSpecialChar(str string) string {
 	length := len(str)
 	if length == 0 {
 		return str
@@ -17,19 +17,13 @@ func reverseStingWithoutAffectSpecialChar(str string) string {
 	for left <= right {
 		leftCharIsAlphabet := isAlphabet(item[left])
 		rightCharIsAlphabet := isAlphabet(item[right])
-		if leftCharIsAlphabet && rightCharIsAlphabet {
-			// 左右两边都是字母时
-			item[left], item[right] = item[right], item[left]
+		if !leftCharIsAlphabet {
 			left++
+		} else if !rightCharIsAlphabet {
 			right--
-		} else if leftCharIsAlphabet && !rightCharIsAlphabet {
-			// 左边是字母右边不是时
-			right--
-		} else if !leftCharIsAlphabet && rightCharIsAlphabet {
-			// 左边不是字母右边是字母
-			left--
 		} else {
-			// 两边都不是字母
+			//  左右两边都是字母时,且不是特殊字符时、
+			swapByte(item, left, right)
 			left++
 			right--
 		}
@@ -41,4 +35,8 @@ func isAlphabet(item byte) bool {
 	isUpperAlphabet := item >= 'A' && item <= 'Z'
 	isLowerAlphabet := item >= 'a' && item <= 'z'
 	return isUpperAlphabet || isLowerAlphabet
+}
+
+func swapByte(items []byte, left, right int) {
+	items[left], items[right] = items[right], items[left]
 }
