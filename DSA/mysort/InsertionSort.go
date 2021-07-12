@@ -10,23 +10,43 @@ package mysort
 	4.重复步骤3，直到找到已排序的元素小于或者等于新元素的位置
 	5.将新元素插入到该位置后
 	6.重复步骤2~5
+
+按升序排序
+
+时间复杂度 O(n), 空间复杂度 O(1) 也是一种分而治之的应用，数据分为已排序和未排序两部分，然后根据位置滑动比较
 */
-func InsertionSort(data []int) {
-	length := len(data)
+func InsertionSort(items []int) {
+	length := len(items)
 	if length <= 1 {
 		return
 	}
 
 	for index := 1; index < length; index++ {
-		startPos := index - 1
-		value := data[index]
+		preIndex := index - 1
+		value := items[index]
 		// 寻找插入的位置
-		for startPos >= 0 && data[startPos] > value {
-			data[startPos+1] = data[startPos] // 数据移动
-			startPos--
+		for preIndex >= 0 && items[preIndex] > value {
+			items[preIndex+1] = items[preIndex] // 数据移动
+			preIndex--
 		}
 
 		//插入数据, 此时用 value 因如果数据移动，data 数据已变化
-		data[startPos+1] = value
+		items[preIndex+1] = value
 	}
+}
+
+// InsertionSortV1 优化: 拆半插入
+func InsertionSortV1(nums []int) {
+	// length := len(nums)
+	// if length <= 1 {
+	// 	return
+	// }
+	// for i := 1; i < length; i++ {
+	// 	prePos := i - 1
+	// 	value := nums[i]
+	// 	for prePos >= 0 && value < nums[prePos] {
+	// 		helper.SwapIntArray(nums, prePos+1, prePos)
+	// 		prePos--
+	// 	}
+	// }
 }
