@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMergeSort(t *testing.T) {
+func Test_ShellSort(t *testing.T) {
 	tests := []struct {
 		intput []int
 		output []int
@@ -22,7 +22,7 @@ func TestMergeSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		result := MergeSort(test.intput)
-		assert.Equal(t, test.output, result)
+		ShellSort(test.intput)
+		assert.Equal(t, test.output, test.intput)
 	}
 }

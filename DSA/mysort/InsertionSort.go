@@ -31,7 +31,9 @@ func InsertionSort(items []int) {
 		}
 
 		//插入数据, 此时用 value 因如果数据移动，data 数据已变化
-		items[preIndex+1] = value
+		if preIndex+1 != index {
+			items[preIndex+1] = value
+		}
 	}
 }
 

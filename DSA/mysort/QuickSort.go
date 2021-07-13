@@ -3,8 +3,9 @@ package mysort
 /*
 快排的思想是这样的：
 	如果要排序数组中下标从 p 到 r 之间的一组数据，
-	我们选择 p 到 r 之间的任意一个数据作为 pivot（分区点）。
+	我们选择 p 到 r 之间的任意一个数据作为 pivot（分区点), 把数据分为小于分区点和大于分区点两个数组
 也是利用分治思想
+时间复杂度 O(nlogn), 最差时可到 O(n^2)
 */
 func QuickSort(data []int) {
 	n := len(data)
@@ -15,6 +16,7 @@ func QuickSort(data []int) {
 }
 
 func quickSort(data []int, left, right int) {
+	// 递归结束条件
 	if left >= right {
 		return
 	}
@@ -40,9 +42,9 @@ func partition(list []int, left, right int) int {
 	return start + 1
 }
 
-// QuickSort2 xx
+// QuickSortV1 xx
 // O(nlogn) 稳定(待确认) 按小到大的方式排序, 最差运行时间O(n^2)
-func QuickSort2(l []int) []int {
+func QuickSortV1(l []int) []int {
 	length := len(l)
 	// base case
 	if length < 2 {
@@ -72,8 +74,8 @@ func QuickSort2(l []int) []int {
 	}
 
 	// recursion
-	QuickSort2(l[:head])
-	QuickSort2(l[head+1:])
+	QuickSortV1(l[:head])
+	QuickSortV1(l[head+1:])
 
 	return l
 }

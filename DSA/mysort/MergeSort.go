@@ -17,23 +17,23 @@ func MergeSort(data []int) []int {
 	left := MergeSort(data[0:mid])
 	right := MergeSort(data[mid:])
 
-	return merge(left, right, mid)
+	return merge(left, right)
 }
 
-func merge(left, right []int, mid int) []int {
+func merge(left, right []int) []int {
 	result := []int{}
 
 	// [左右]对比，是指左的第一个元素，与右边的第一个元素进行对比，哪个小，
 	// 就先放到结果的第一位，然后左或右取出了元素的那边的索引进行
 	l, r := 0, 0
 	for l < len(left) && r < len(right) {
-		if left[l] < right[r] {
+		if left[l] <= right[r] {
 			result = append(result, left[l])
 			l++
-			continue
+		} else {
+			result = append(result, right[r])
+			r++
 		}
-		result = append(result, right[r])
-		r++
 	}
 	// 比较完后，还要分别将左，右的剩余的元素，追加到结果列的后面(不然就漏咯）
 	result = append(result, left[l:]...)
