@@ -1,4 +1,4 @@
-package string
+package bootcamp
 
 /*
 题目：

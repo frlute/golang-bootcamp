@@ -1,4 +1,4 @@
-package string
+package bootcamp
 
 /*
 判断字符串是否回文字符串

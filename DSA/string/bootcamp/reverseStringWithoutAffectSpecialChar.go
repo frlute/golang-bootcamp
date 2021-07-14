@@ -1,4 +1,4 @@
-package string
+package bootcamp
 
 /*
 题目: Given a string, that contains a special character together with alphabets (‘a’ to ‘z’ and ‘A’ to ‘Z’), reverse the string in a way that special characters are not affected.

@@ -1,6 +1,7 @@
 package linkedlist
 
-func numberArrayToLinkedlist(items []int) *LinkedListNode {
+// NumberArrayToLinkedlist _
+func NumberArrayToLinkedlist(items []int) *LinkedListNode {
 	var list SingleLinkedList
 	for _, item := range items {
 		list.Append(item)

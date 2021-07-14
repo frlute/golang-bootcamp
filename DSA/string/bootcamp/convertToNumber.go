@@ -1,4 +1,4 @@
-package string
+package bootcamp
 
 import (
 	"math"
@@ -9,9 +9,9 @@ import (
 string 转换为数字, 支持负数
 提示： 一次生成一个数字的结果
 solution:
-多个字符时逐位转换
-注意正负数符号
-注意转换后的百分位，
+	- 多个字符时逐位转换
+	- 注意正负数符号
+	- 注意转换后的百分位，
 */
 
 func convertToInt(item string) int {

@@ -105,7 +105,7 @@ func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
 	return nil
 }
 
-// RemoveAt remove the item at the specified position item in linked list
+// RemoveAt remove the item at the specified position item in linked list, pos 从 0 开始
 func (ll *SingleLinkedList) RemoveAt(pos int) {
 	if ll.length <= pos {
 		fmt.Printf("pos %d it out of the linked list %d\n", pos, ll.length)
