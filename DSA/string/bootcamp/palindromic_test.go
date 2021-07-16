@@ -29,6 +29,8 @@ func Test_isPalindromic(t *testing.T) {
 		t.Run(testCase.input, func(t *testing.T) {
 			res := isPalindromic(testCase.input)
 			assert.Equal(t, testCase.output, res)
+
+			assert.Equal(t, testCase.output, isPalindromicV1(testCase.input))
 		})
 	}
 }
