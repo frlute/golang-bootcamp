@@ -175,6 +175,31 @@ func (ll *SingleLinkedList) IndexOf(value interface{}) int {
 	return -1
 }
 
+// Search get the value node and position in linked list
+func (ll *SingleLinkedList) Search(value interface{}) interface{} {
+
+	head := ll.Head
+	for pos := 0; pos < ll.length; pos++ {
+		if head.Value == value {
+			return head
+		}
+		head = head.Next
+	}
+	return nil
+}
+
+func (ll *SingleLinkedList) Index(index int) *LinkedListNode {
+
+	head := ll.Head
+	for pos := 0; pos < ll.length; pos++ {
+		if pos == index {
+			return head
+		}
+		head = head.Next
+	}
+	return nil
+}
+
 // IsEmpty judge the linked list is empty
 func (ll *SingleLinkedList) IsEmpty() bool {
 	if ll == nil || ll.Head == nil {
@@ -192,7 +217,6 @@ func (ll *SingleLinkedList) Size() int {
 }
 
 // Display a string representation of the list
-// TODO 如果是循环链表时，disply 和 string 目前会无限循环，需要改为按 pos 遍历
 func (ll *SingleLinkedList) Display() {
 	if ll.Head == nil {
 		return
@@ -200,8 +224,9 @@ func (ll *SingleLinkedList) Display() {
 	fmt.Printf("Display Single Linked List: ")
 
 	head := ll.Head
-	for head != nil {
-		if head.Next == nil {
+	for i := 0; i < ll.length; i++ {
+		// 兼容链表成环
+		if head.Next == nil || i == ll.length {
 			fmt.Printf("%v\n", head.Value)
 		} else {
 			fmt.Printf("%v->", head.Value)
@@ -213,20 +238,23 @@ func (ll *SingleLinkedList) Display() {
 // String a string representation of the list
 func (ll *SingleLinkedList) String() string {
 	if ll.Head == nil {
-		return "This is a empty single linked list."
+		fmt.Println("[info] This is a empty single linked list.")
+		return ""
 	}
 	var output strings.Builder
 	output.WriteString("Single Linked List: ")
 
 	head := ll.Head
-	for head != nil {
-		if head.Next == nil {
+	for i := 0; i < ll.length; i++ {
+		// 兼容链表成环
+		if head.Next == nil || i == ll.length {
 			output.WriteString(fmt.Sprintf("%v\n", head.Value))
 		} else {
 			output.WriteString(fmt.Sprintf("%v->", head.Value))
 		}
 		head = head.Next
 	}
+
 	return output.String()
 }
 
@@ -235,4 +263,14 @@ func (ll *SingleLinkedList) Reset() {
 	ll.Head = nil
 	ll.Tail = nil
 	ll.length = 0
+}
+
+// AppendIntoTail _
+// TODO 方便构造循环成环数据, 暂未考虑边界条件
+func (ll *SingleLinkedList) AppendIntoTail(node *LinkedListNode) {
+	if node == nil {
+		return
+	}
+	ll.length++
+	ll.Tail.Next = node
 }

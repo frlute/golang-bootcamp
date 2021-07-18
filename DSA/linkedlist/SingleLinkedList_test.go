@@ -88,7 +88,7 @@ func Test_RemoveAt(t *testing.T) {
 	// 删首节点(考虑只有一个元素)
 	ll.RemoveAt(0)
 	as.Equal(0, ll.Size())
-	as.Equal("This is a empty single linked list.", ll.String())
+	as.Equal("", ll.String())
 	as.Nil(ll.Tail)
 }
 
@@ -118,7 +118,7 @@ func Test_Delete(t *testing.T) {
 	// 删头节点
 	ll.Delete("one")
 	as.Equal(0, ll.Size())
-	as.Equal("This is a empty single linked list.", ll.String())
+	as.Equal("", ll.String())
 	as.Nil(ll.Tail)
 
 	ll.Display()

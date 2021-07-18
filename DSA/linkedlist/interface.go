@@ -10,7 +10,10 @@ type LinkedList interface {
 	RemoveAt(pos int)
 	Delete(value interface{})
 
+	// The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
 	IndexOf(value interface{}) int
+	// 根据值搜索对应的节点
+	Search(value interface{}) interface{}
 
 	IsEmpty() bool
 	// get the linked list size
@@ -24,8 +27,4 @@ type LinkedList interface {
 
 	// reset linked list
 	Reset()
-
-	// -----------以上为基本操作---------
-	// 下面是一些应用
-	// HasCycle() bool
 }

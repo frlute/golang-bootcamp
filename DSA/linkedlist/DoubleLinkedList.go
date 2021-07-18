@@ -64,6 +64,10 @@ func (dl *DoubleLinkedList) IndexOf(value interface{}) int {
 	return -1
 }
 
+func (dl *DoubleLinkedList) Search(value interface{}) interface{} {
+	return nil
+}
+
 // IsEmpty judge the linked list is empty
 func (dl *DoubleLinkedList) IsEmpty() bool {
 	return false
