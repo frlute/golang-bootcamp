@@ -76,8 +76,8 @@ func (ll *SingleLinkedList) Prepend(value interface{}) {
 
 // Insert add an item to the specific position in linked list
 func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
-	if ll.length < pos {
-		return fmt.Errorf("pos %d it out of the linked list %d", pos, ll.length)
+	if ll.Size() < pos {
+		return fmt.Errorf("pos %d it out of the linked list %d", pos, ll.Size())
 	} else if ll.Size() == pos {
 		ll.Append(value)
 	} else if pos == 0 {
@@ -90,7 +90,7 @@ func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
 
 		head := ll.Head
 		var preNode *LinkedListNode
-		for i := 0; i < ll.length; i++ {
+		for i := 0; i < ll.Size(); i++ {
 			if i == pos {
 				node.Next = head
 				preNode.Next = node
@@ -107,14 +107,14 @@ func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
 
 // RemoveAt remove the item at the specified position item in linked list, pos 从 0 开始
 func (ll *SingleLinkedList) RemoveAt(pos int) {
-	if ll.length <= pos {
-		fmt.Printf("pos %d it out of the linked list %d\n", pos, ll.length)
+	if ll.Size() <= pos {
+		fmt.Printf("pos %d it out of the linked list %d\n", pos, ll.Size())
 		return
 	}
 
 	head := ll.Head
 	var preNode *LinkedListNode
-	for i := 0; i < ll.length; i++ {
+	for i := 0; i < ll.Size(); i++ {
 		if i == pos {
 			// 删除的位置是尾节点是，前置节点指为 nil 即可
 			if head.Next == nil {
@@ -140,7 +140,7 @@ func (ll *SingleLinkedList) Delete(value interface{}) {
 	head := ll.Head
 	var preNode *LinkedListNode
 	// TODO 待用 for head.Next != nil 优化
-	for pos := 0; pos < ll.length; pos++ {
+	for pos := 0; pos < ll.Size(); pos++ {
 		if head.Value == value {
 			// 尾节点时特殊处理
 			if head.Next == nil {
@@ -166,7 +166,7 @@ func (ll *SingleLinkedList) Delete(value interface{}) {
 func (ll *SingleLinkedList) IndexOf(value interface{}) int {
 
 	head := ll.Head
-	for pos := 0; pos < ll.length; pos++ {
+	for pos := 0; pos < ll.Size(); pos++ {
 		if head.Value == value {
 			return pos
 		}
@@ -179,7 +179,7 @@ func (ll *SingleLinkedList) IndexOf(value interface{}) int {
 func (ll *SingleLinkedList) Search(value interface{}) interface{} {
 
 	head := ll.Head
-	for pos := 0; pos < ll.length; pos++ {
+	for pos := 0; pos < ll.Size(); pos++ {
 		if head.Value == value {
 			return head
 		}
@@ -191,7 +191,7 @@ func (ll *SingleLinkedList) Search(value interface{}) interface{} {
 func (ll *SingleLinkedList) Index(index int) *LinkedListNode {
 
 	head := ll.Head
-	for pos := 0; pos < ll.length; pos++ {
+	for pos := 0; pos < ll.Size(); pos++ {
 		if pos == index {
 			return head
 		}
@@ -213,6 +213,15 @@ func (ll *SingleLinkedList) Size() int {
 	if ll.Head == nil {
 		return 0
 	}
+	// 如果 length 未正确记录时
+	if ll.Head != nil && ll.length == 0 {
+		cur := ll.Head
+		for cur != nil {
+			ll.length++
+			cur = cur.Next
+		}
+	}
+
 	return ll.length
 }
 
@@ -224,9 +233,9 @@ func (ll *SingleLinkedList) Display() {
 	fmt.Printf("Display Single Linked List: ")
 
 	head := ll.Head
-	for i := 0; i < ll.length; i++ {
+	for i := 0; i < ll.Size(); i++ {
 		// 兼容链表成环
-		if head.Next == nil || i == ll.length {
+		if head.Next == nil || i == ll.Size() {
 			fmt.Printf("%v\n", head.Value)
 		} else {
 			fmt.Printf("%v->", head.Value)
@@ -245,9 +254,9 @@ func (ll *SingleLinkedList) String() string {
 	output.WriteString("Single Linked List: ")
 
 	head := ll.Head
-	for i := 0; i < ll.length; i++ {
+	for i := 0; i < ll.Size(); i++ {
 		// 兼容链表成环
-		if head.Next == nil || i == ll.length {
+		if head.Next == nil || i == ll.Size() {
 			output.WriteString(fmt.Sprintf("%v\n", head.Value))
 		} else {
 			output.WriteString(fmt.Sprintf("%v->", head.Value))
