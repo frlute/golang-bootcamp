@@ -45,6 +45,7 @@ n1 → … → nk-1 → nk → nk+1 ← … ← nm
 We want nk+1’s next node to point to nk.
 
 详见 https://leetcode.com/problems/reverse-linked-list/solution/
+简单明了的解释见： https://zhuanlan.zhihu.com/p/86745433
 */
 func reverseBasedRecursive(head *ll.LinkedListNode) *ll.LinkedListNode {
 	if head == nil || head.Next == nil {
