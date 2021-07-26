@@ -34,10 +34,7 @@ func rotateLeftV1(d int32, arr []int32) []int32 {
 	res := make([]int32, len(arr))
 	var index int32
 	for ; index < length; index++ {
-		pos := (index - d) % length
-		if pos < 0 {
-			pos += length
-		}
+		pos := (index + length - d) % length
 		res[pos] = arr[index]
 	}
 	return res
