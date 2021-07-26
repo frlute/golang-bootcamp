@@ -93,14 +93,3 @@ func (l *MyArray) Len() int {
 func (l *MyArray) Display() {
 	fmt.Printf("%#v\n", l.items)
 }
-
-func (l *MyArray) Filter(fn func(int) bool) []int {
-	var p []int
-	for _, value := range l.items {
-		if fn(value) {
-			p = append(p, value)
-		}
-	}
-
-	return p
-}

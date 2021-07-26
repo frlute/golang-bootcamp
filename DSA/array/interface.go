@@ -12,8 +12,4 @@ type Array interface {
 	Remove(value int)
 
 	Display()
-
-	Filter(func(int) bool) []int
-	// Map()
-	// Reduce()
 }
