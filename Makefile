@@ -30,7 +30,7 @@ test:
 	mkdir -p coverage
 	make test_DSA
 
-coverage:
+coverage: test
 	find ./coverage -name "coverage.*.out.*" -exec tail +2 {} >> ./coverage/coverage.out \;
 	go tool cover -html coverage.out -o coverage.html
 	go tool cover -func=coverage.out
@@ -46,6 +46,8 @@ test_DSA:
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/search -coverprofile=./coverage/coverage.dsa.out.6 -covermode=count -coverpkg=./...
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/hash -coverprofile=./coverage/coverage.dsa.out.7 -covermode=count -coverpkg=./...
 	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/graph -coverprofile=./coverage/coverage.dsa.out.8 -covermode=count -coverpkg=./...
+	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/heap -coverprofile=./coverage/coverage.dsa.out.9 -covermode=count -coverpkg=./...
+	go test -gcflags=-l -v $(CURRENT_GIT_GROUP)/$(CURRENT_GIT_REPO)/DSA/mysort -coverprofile=./coverage/coverage.dsa.out.10 -covermode=count -coverpkg=./...
 
 clean:
 	rm -rf coverage

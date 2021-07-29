@@ -1,6 +1,6 @@
 package binarySearch
 
-// Search 二分查找
+// Search 二分查找，入参必须已排好序，否则二分法失去了意义
 func Search(nums []int, target int) int {
 	length := len(nums)
 	if length == 0 {
@@ -8,9 +8,9 @@ func Search(nums []int, target int) int {
 	}
 	left, right := 0, length-1
 	// 必须按顺序排序时才能这样判断
-	// if nums[right] < target {
-	// 	return -1
-	// }
+	if nums[right] < target {
+		return -1
+	}
 
 	for left <= right {
 		// mid := (left + right) / 2

@@ -72,7 +72,7 @@ func LeftBoundSearchV1(nums []int, target int) int {
 	return left
 }
 
-// LeftBoundSearchV1 表示优化版本
+// LeftBoundSearchV2 表示优化版本
 func LeftBoundSearchV2(nums []int, target int) int {
 	length := len(nums)
 	if length == 0 {
