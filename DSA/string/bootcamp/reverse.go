@@ -32,3 +32,16 @@ func reverseV1(item string) string {
 	return reverseV1(item[1:]) + item[:1]
 
 }
+
+// TODO 递归法 暂未看
+func reverseString(s []byte) {
+	if len(s) == 0 {
+		return
+	}
+	reverseString(s[1:])
+	c := s[0]
+	for i := 0; i < len(s)-1; i++ {
+		s[i] = s[i+1]
+	}
+	s[len(s)-1] = c
+}

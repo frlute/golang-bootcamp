@@ -31,6 +31,7 @@ func deleteDuplicates(head *ll.LinkedListNode) *ll.LinkedListNode {
 }
 
 // 迭代法: 时间复杂度 O(n), 空间复杂度 O(1)
+// 此种解法只适合已排序的单链表
 func deleteDuplicatesV1(head *ll.LinkedListNode) *ll.LinkedListNode {
 	cur := head
 	for cur != nil && cur.Next != nil {

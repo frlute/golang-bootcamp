@@ -27,6 +27,7 @@ func CreateSingleLinkedNode(value interface{}) LinkedList {
 }
 
 func newSingleLinkedNode(value interface{}) *SingleLinkedList {
+	// TODO 此处可以改为使用哨兵节点作为头结点
 	node := &LinkedListNode{
 		Value: value,
 		Next:  nil,
@@ -43,8 +44,8 @@ func (ll *SingleLinkedList) Append(value interface{}) {
 		Value: value,
 		Next:  nil,
 	}
-	// TODO ll == nil 时需要考虑吗，目前来说 ll 不能为指针
-	if ll.Head == nil {
+
+	if ll.IsEmpty() {
 		ll.Head = node
 		ll.Tail = node
 	} else {
@@ -89,6 +90,7 @@ func (ll *SingleLinkedList) Insert(value interface{}, pos int) error {
 		}
 
 		head := ll.Head
+		// TODO 也可以用哨兵节点方式，省去记录前置节点的过程
 		var preNode *LinkedListNode
 		for i := 0; i < ll.Size(); i++ {
 			if i == pos {
@@ -138,27 +140,51 @@ func (ll *SingleLinkedList) RemoveAt(pos int) {
 // Delete delete the specific item in linked list
 func (ll *SingleLinkedList) Delete(value interface{}) {
 	head := ll.Head
-	var preNode *LinkedListNode
+	// var preNode *LinkedListNode
 	// TODO 待用 for head.Next != nil 优化
-	for pos := 0; pos < ll.Size(); pos++ {
-		if head.Value == value {
-			// 尾节点时特殊处理
-			if head.Next == nil {
-				if preNode != nil {
-					preNode.Next = head.Next
-				} else {
-					// 只有一个节点时
-					ll.Head = nil
-				}
-				ll.Tail = preNode
-			} else {
-				preNode.Next = head.Next
-			}
+	// for pos := 0; pos < ll.Size(); pos++ {
+	// 	if head.Value == value {
+	// 		// 尾节点时特殊处理
+	// 		if head.Next == nil {
+	// 			if preNode != nil {
+	// 				preNode.Next = head.Next
+	// 			} else {
+	// 				// 只有一个节点时
+	// 				ll.Head = nil
+	// 			}
+	// 			ll.Tail = preNode
+	// 		} else {
+	// 			preNode.Next = head.Next
+	// 		}
+	// 		ll.length--
+	// 		break
+	// 	}
+	// 	preNode = head
+	// 	head = head.Next
+	// }
+
+	// 利用哨兵节点简化业务
+	dummy := &LinkedListNode{}
+	dummy.Next = head
+	res := dummy
+	for dummy.Next != nil {
+		if dummy.Next.Value == value {
+			next := dummy.Next.Next
+			dummy.Next = next
 			ll.length--
-			break
+			ll.Head = res.Next
+			// 尾节点时更新新的尾节点
+			if next == nil {
+				// 只有一个节点时，删除完 Tail 就是 nil 了，而非空节点
+				if dummy.Value == nil {
+					ll.Tail = nil
+				} else {
+					ll.Tail = dummy
+				}
+			}
+			return
 		}
-		preNode = head
-		head = head.Next
+		dummy = dummy.Next
 	}
 }
 
@@ -216,6 +242,7 @@ func (ll *SingleLinkedList) Size() int {
 	// 如果 length 未正确记录时
 	if ll.Head != nil && ll.length == 0 {
 		cur := ll.Head
+		// TODO 如果链表成环此种方式会造成死循环
 		for cur != nil {
 			ll.length++
 			cur = cur.Next
@@ -227,7 +254,7 @@ func (ll *SingleLinkedList) Size() int {
 
 // Display a string representation of the list
 func (ll *SingleLinkedList) Display() {
-	if ll.Head == nil {
+	if ll.IsEmpty() {
 		return
 	}
 	fmt.Printf("Display Single Linked List: ")
@@ -246,10 +273,11 @@ func (ll *SingleLinkedList) Display() {
 
 // String a string representation of the list
 func (ll *SingleLinkedList) String() string {
-	if ll.Head == nil {
+	if ll.IsEmpty() {
 		fmt.Println("[info] This is a empty single linked list.")
 		return ""
 	}
+
 	var output strings.Builder
 	output.WriteString("Single Linked List: ")
 
@@ -269,6 +297,9 @@ func (ll *SingleLinkedList) String() string {
 
 // Reset reset all linked list
 func (ll *SingleLinkedList) Reset() {
+	if ll.IsEmpty() {
+		return
+	}
 	ll.Head = nil
 	ll.Tail = nil
 	ll.length = 0

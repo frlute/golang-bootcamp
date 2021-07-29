@@ -17,10 +17,6 @@ import (
 */
 
 func detectCycle(head *ll.LinkedListNode) *ll.LinkedListNode {
-	if head == nil || head.Next == nil {
-		return nil
-	}
-
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		fast = fast.Next.Next
