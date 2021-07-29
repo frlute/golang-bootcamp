@@ -19,6 +19,9 @@ func NewStackBasedLinkedList(capacity int64) Stack {
 	if capacity < 0 {
 		capacity = 0
 	}
+	if capacity == 0 {
+		capacity = 10
+	}
 
 	return &StackBasedLinkedList{
 		top:      &ll.LinkedListNode{},

@@ -12,4 +12,8 @@ type Stack interface {
 
 	Flush()
 	Display()
+
+	// 还可以增加
+	// Max() interface{}
+	// Min() interface{}
 }
