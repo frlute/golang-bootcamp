@@ -64,7 +64,12 @@ func (q *sequentialQueue) Dequeue() interface{} {
 }
 
 func (q *sequentialQueue) Peek() interface{} {
-	return q.items[q.tail]
+	// TODO 可能存在歧义，如值是 -1 时，之后再修正
+	if q.IsEmpty() {
+		return -1
+	}
+	// tail 提前+ 了，故需要 - 1
+	return q.items[q.tail-1]
 }
 
 func (q *sequentialQueue) IsFull() bool {
@@ -85,4 +90,8 @@ func (q *sequentialQueue) Max() interface{} {
 	}
 
 	return max
+}
+
+func (q *sequentialQueue) Display() {
+	fmt.Printf("sequentialQueue: %+v\n", q.items)
 }

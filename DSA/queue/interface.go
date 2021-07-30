@@ -9,6 +9,8 @@ type Queue interface {
 	Peek() interface{}
 	IsFull() bool
 	IsEmpty() bool
+
+	Display()
 }
 
 // Deque 双端队列

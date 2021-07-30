@@ -13,12 +13,16 @@ func Test_SequentialQueue_lifecycle(t *testing.T) {
 
 	as.Equal(true, s.IsEmpty())
 	as.Equal(false, s.IsFull())
+	as.Equal(-1, s.Peek())
 
 	// enqueue
 	s.Enqueue("hello")
 	s.Enqueue(",")
 	s.Enqueue("world")
 
+	s.Display()
+
+	as.Equal(",", s.Peek())
 	as.Equal(true, s.IsFull())
 	as.Equal(false, s.IsEmpty())
 
@@ -37,6 +41,8 @@ func Test_QueueMax(t *testing.T) {
 	s.Enqueue(9)
 	s.Enqueue(-1)
 	s.Enqueue(8)
+
+	s.Display()
 
 	assert.Equal(t, 9, s.Max())
 }

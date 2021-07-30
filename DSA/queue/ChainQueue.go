@@ -59,3 +59,7 @@ func (q *chainQueue) IsFull() bool {
 func (q *chainQueue) IsEmpty() bool {
 	return q.head == nil
 }
+
+func (q *chainQueue) Display() {
+	// TODO
+}
